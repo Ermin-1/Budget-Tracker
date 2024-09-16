@@ -1,4 +1,5 @@
 ﻿using Budget_Tracker.Data;
+using Budget_Tracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,75 @@ namespace Budget_Tracker.Controllers
 
             return View(category);
 
+        }
+
+        //Get: Category/AddOrEdit
+        [HttpGet]
+        public async Task<IActionResult> AddOrEdit(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new Category());
+            }
+            else
+            { 
+            return View( _context.Categories.Find(id));
+            }
+        }
+
+
+        //POST: Category/AddOrEdit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit([Bind("CategoryId,Title,Icon,Type")] Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                if (category.CategoryId == 0)
+                {
+                    _context.Add(category);
+                  
+                }
+                else
+                {_context.Update(category);
+                 
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
+
+        //Get: Category/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+           var category = await _context.Categories.FirstOrDefaultAsync(m => m.CategoryId == id);
+            if (category == null)
+            {
+                    return NotFound();
+                }
+    
+                return View(category);  
+        }
+
+        //Post: Category/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category != null) 
+            {
+                _context.Categories.Remove(category);
+            }
+         
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

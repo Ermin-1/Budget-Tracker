@@ -12,18 +12,13 @@ namespace Budget_Tracker
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-
-
-
-
-
-
-
-
             // Register database
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
 
+
+            //Register SyncFuion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJeFRxdV9DaUwgOX1dQl9nSXdScEVqWn5bdHVXR2g=");
 
 
             var app = builder.Build();
