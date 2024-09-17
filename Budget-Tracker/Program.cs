@@ -18,7 +18,7 @@ namespace Budget_Tracker
 
 
             //Register SyncFuion License
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJeFRxdV9DaUwgOX1dQl9nSXdScEVqWn5bdHVXR2g=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2U1hhQlJBfV5CQmJPYVF2R2dJeFRxdV9DaUwgOX1dQl9nSXdScUVnWnlddXdTQmA=");
 
 
             var app = builder.Build();

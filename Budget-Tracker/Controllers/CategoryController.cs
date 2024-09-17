@@ -11,6 +11,7 @@ namespace Budget_Tracker.Controllers
 
         public CategoryController(AppDbContext context)
         {
+
             this._context = context;
         }
 
